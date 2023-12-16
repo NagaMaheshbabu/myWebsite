@@ -101,7 +101,7 @@ document.querySelector("#pswd").addEventListener("focus", () => {
     document.querySelector("#btn").style.cursor = "no-drop";
     document.querySelector("#message").style.display = "block";
 
-    document.querySelector("#formdata").style.height = "500px";
+    document.querySelector("#formdata").style.height = "510px";
   } else {
     document.querySelector("#message").style.display = "none";
     document.querySelector("#btn").disabled = false;
