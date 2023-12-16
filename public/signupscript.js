@@ -11,8 +11,15 @@ email.addEventListener("input", () => {
 
   if (email.value) {
     if (email.value.match(regex)) {
-      p.innerText = "valid email Address";
-      p.style.color = "green";
+      const intervalId = setInterval(() => {
+        p.innerText = "valid email Address";
+        p.style.color = "green";
+      }, 1000);
+
+      setTimeout(() => {
+        clearInterval(intervalId);
+        p.innerText = "";
+      }, 3000);
     } else {
       p.innerText = "Invalid email Address";
       p.style.color = "red";
@@ -50,6 +57,7 @@ inputText.onfocus = function () {
 };
 inputText.onblur = function () {
   document.getElementById("message").style.display = "none";
+ 
 };
 let lowercaseletters = /[a-z]/g;
 var uppercaseletters = /[A-Z]/g;
@@ -88,29 +96,31 @@ inputText.onkeyup = function () {
     len.classList.remove("valid");
   }
 };
-document.querySelector("#pswd").addEventListener("focus", () => {
-  if (
-    !(
-      pswd.value.match(lowercaseletters) &&
-      pswd.value.match(uppercaseletters) &&
-      pswd.value.match(numbers) &&
-      pswd.value.length >= 8
-    )
-  ) {
-    document.querySelector("#btn").disabled = true;
-    document.querySelector("#btn").style.cursor = "no-drop";
-    document.querySelector("#message").style.display = "block";
+document.querySelector("#pswd").addEventListener("input", () => {
+  if (pswd.value) {
+    if (
+      !(
+        pswd.value.match(lowercaseletters) &&
+        pswd.value.match(uppercaseletters) &&
+        pswd.value.match(numbers) &&
+        pswd.value.length >= 8
+      )
+    ) {
+      document.querySelector("#btn").disabled = true;
+      document.querySelector("#btn").style.cursor = "no-drop";
+      document.querySelector("#message").style.display = "block";
 
-    document.querySelector("#formdata").style.height = "510px";
+      document.querySelector("#formdata").style.height = "510px";
+    } else {
+      document.querySelector("#btn").disabled = false;
+      document.querySelector("#message").style.display = "none";
+      document.querySelector("#btn").style.cursor = "pointer";
+      document.querySelector("form").style.height = "470px";
+    }
   } else {
     document.querySelector("#message").style.display = "none";
-    document.querySelector("#btn").disabled = false;
-    document.querySelector("#btn").style.cursor = "pointer";
+    document.querySelector("form").style.height = "470px";
   }
-});
-
-document.querySelector("#pswd").addEventListener("blur", () => {
-  document.querySelector("form").style.height = "470px";
 });
 
 const form = document.querySelector("#formdata");
@@ -121,7 +131,7 @@ form.addEventListener("submit", async (e) => {
 
   const formData = new FormData(form);
 
-  const response = await fetch("http://localhost:3000/", {
+  const response = await fetch("http://localhost:3000/register", {
     method: "POST",
     body: formData,
   });
@@ -149,7 +159,7 @@ form.addEventListener("submit", async (e) => {
     }, 5000);
   }
   if (
-    data === "Email already exists!" ||
+    data === "Email already exists!!" ||
     data === "User registered successfully!"
   ) {
     document.querySelector("#First").value = "";

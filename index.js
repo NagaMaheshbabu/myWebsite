@@ -47,8 +47,9 @@ app.get('/',(req,res)=>{
     res.render('signup');
 })
 
-app.get('/login',(req,res)=>{
-    res.send("hello")
+app.post('/register',(req,res)=>{
+    const {First}= req.body;
+    console.log(First)
 })
 
 //view the engine on ejs
