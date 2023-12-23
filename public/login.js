@@ -47,7 +47,7 @@ form.addEventListener('submit',async(e)=>{
         document.querySelector('#email').value = ""
         document.querySelector('#pswd').value = ""
       // Redirect to the homepage
-      window.location.href = '/index';
+      window.location.href = './index';
     }
     else{
         const para = document.createElement('p');

@@ -71,10 +71,27 @@ app.get("/r/:cats", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login");
 });
-app.post("/login", upload.none(), (req, res) => {
-  console.log(req.body);
-});
+app.post("/login", upload.none(), async(req, res) => {
+  const {email,password} = req.body;
 
+try{
+  const User = await regModel.findOne({Email:email,Password:password}).exec();
+  if(User){
+   res.status(200).json({message:'Success'});
+  }
+  else{
+   res.status(200).json({message:'Invalid email or password. Try again!'})
+  }
+}
+catch(e){
+  res.status(400).json({Message:'Internal Server error!'});
+}
+
+
+});
+app.get('/index',(req,res)=>{
+  res.render('index')
+})
 app.post("/register", upload.none(), async (req, res) => {
   const { First, Last, email, password } = req.body;
 
