@@ -71,46 +71,45 @@ app.get("/r/:cats", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login");
 });
-app.post("/login", upload.none(), async(req, res) => {
-  const {email,password} = req.body;
+app.post("/login", upload.none(), async (req, res) => {
+  const { email, password } = req.body;
 
-try{
-  const User = await regModel.findOne({Email:email,Password:password}).exec();
-  if(User){
-   res.status(200).json({message:'Success'});
+  try {
+    const User = await regModel
+      .findOne({ Email: email, Password: password })
+      .exec();
+    if (User) {
+      res.status(200).json({ message: "Success" });
+    } else {
+      res
+        .status(200)
+        .json({ message: "Invalid email or password. Try again!" });
+    }
+  } catch (e) {
+    res.status(400).json({ Message: "Internal Server error!" });
   }
-  else{
-   res.status(200).json({message:'Invalid email or password. Try again!'})
-  }
-}
-catch(e){
-  res.status(400).json({Message:'Internal Server error!'});
-}
-
-
 });
-app.get('/index',(req,res)=>{
-  res.render('index')
-})
+app.get("/index", (req, res) => {
+  res.render("index");
+});
 app.post("/register", upload.none(), async (req, res) => {
   const { First, Last, email, password } = req.body;
 
-
   const existingUser = await regModel.find({ Email: email }).exec();
   console.log(existingUser);
- 
+
   try {
-    if (existingUser.length >0) {
+    if (existingUser.length > 0) {
       res.status(200).json({ Message: "Email already exists!" });
     } else {
       const newUser = new regModel({
-          FirstName: First,
-          LastName: Last,
-          Email: email,
-          Password: password,
-        })
-        await newUser.save();
-        res.status(200).json({Message:"User registered successfully!"})
+        FirstName: First,
+        LastName: Last,
+        Email: email,
+        Password: password,
+      });
+      await newUser.save();
+      res.status(200).json({ Message: "User registered successfully!" });
     }
   } catch (e) {
     console.log("error occured while registering..");
@@ -129,7 +128,7 @@ app.post("/contact", (req, res) => {
     City: city,
   });
   data.save();
-  res.send().json({ Message: "Data received successfull.." });
+  res.redirect("contact");
 });
 app.get("/contact", (req, res) => {
   res.render("contact");
