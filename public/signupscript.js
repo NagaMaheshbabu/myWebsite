@@ -131,13 +131,14 @@ form.addEventListener("submit", async (e) => {
   const response = await fetch("http://localhost:3000/register", {
     method: "POST",
     body: formData,
+    
   });
   const data = await response.json();
   const span = document.createElement("span");
   span.classList.add("exist");
   var count = 0;
-  if (data === "Email already exists!") {
-    span.innerHTML = data;
+  if (data.Message === "Email already exists!") {
+    span.innerHTML = data.Message;
     form.after(span);
 
     setTimeout(() => {
@@ -147,24 +148,13 @@ form.addEventListener("submit", async (e) => {
   }
   var user = document.createElement("span");
   user.classList.add("user");
-  if (data === "User registered successfully!") {
-    user.innerHTML = data;
+  if (data.Message === "User registered successfully!") {
+    user.innerHTML = data.Message;
     form.after(user);
     setTimeout(() => {
       document.querySelector("#email").value = "";
       user.remove();
     }, 5000);
   }
-  if (
-    data === "Email already exists!!" ||
-    data === "User registered successfully!"
-  ) {
-    document.querySelector("#First").value = "";
-    document.querySelector("#Last").value = "";
-    document.querySelector("#pswd").value = "";
-    letter.classList.remove("valid");
-    capital.classList.remove("valid");
-    number.classList.remove("valid");
-    len.classList.remove("valid");
-  }
+ 
 });

@@ -2,9 +2,7 @@ const express = require("express");
 const app = express();
 const companyData = require("./companyData");
 
-
-
-const multer = require('multer');
+const multer = require("multer");
 const upload = multer();
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +13,7 @@ app.use(express.json());
 // Mongoose connection here ----
 const Mongoose = require("mongoose");
 const connection = () => {
-  Mongoose.connect("mongodb://127.0.0.1/ContactData")
+  Mongoose.connect("mongodb://127.0.0.1/MyWebsiteData")
     .then(() => {
       console.log("Connected to MongoDB");
     })
@@ -44,6 +42,16 @@ const schema = new Mongoose.Schema({
 
 const Contact = Mongoose.model("Contact", schema);
 
+//creating schema for new users
+const regSchema = new Mongoose.Schema({
+  FirstName: String,
+  LastName: String,
+  Email: String,
+  Password: String,
+});
+//register model
+const regModel = Mongoose.model("Signupdata", regSchema);
+
 //-------------------
 const path = require("path");
 //view the engine on ejs
@@ -55,32 +63,43 @@ app.get("/", (req, res) => {
   res.render("signup");
 });
 
-app.get('/r/:cats',(req,res)=>{
-    const {cats} = req.params;
-    res.render('cats',{companyData});
-})
+app.get("/r/:cats", (req, res) => {
+  const { cats } = req.params;
+  res.render("cats", { companyData });
+});
 
 app.get("/login", (req, res) => {
   res.render("login");
 });
-app.post("/login",upload.none(), (req, res) => {
- console.log(req.body);
-});
-
-app.post("/register",upload.none(), (req, res) => {
+app.post("/login", upload.none(), (req, res) => {
   console.log(req.body);
- try{
-  res.json({"message":"Registerd successful..."});
-
- }catch(e){
-  console.log("error occured while registering..");
-  res.status(500).json({e:"Internal server error!"});
-
- }
 });
 
+app.post("/register", upload.none(), async (req, res) => {
+  const { First, Last, email, password } = req.body;
 
 
+  const existingUser = await regModel.find({ Email: email }).exec();
+  console.log(existingUser);
+ 
+  try {
+    if (existingUser.length >0) {
+      res.status(200).json({ Message: "Email already exists!" });
+    } else {
+      const newUser = new regModel({
+          FirstName: First,
+          LastName: Last,
+          Email: email,
+          Password: password,
+        })
+        await newUser.save();
+        res.status(200).json({Message:"User registered successfully!"})
+    }
+  } catch (e) {
+    console.log("error occured while registering..");
+    res.status(500).json({ e: "Internal server error!" });
+  }
+});
 
 //contact
 app.post("/contact", (req, res) => {
@@ -93,6 +112,7 @@ app.post("/contact", (req, res) => {
     City: city,
   });
   data.save();
+  res.send().json({ Message: "Data received successfull.." });
 });
 app.get("/contact", (req, res) => {
   res.render("contact");
@@ -107,11 +127,10 @@ app.get("/profile", (req, res) => {
   res.render("profile");
 });
 
-
-app.post('/demo',(req,res)=>{
- const {name,age}= req.body;
- res.send(`Your pet name is ${name} and age is ${age} years`);
-})
+app.post("/demo", (req, res) => {
+  const { name, age } = req.body;
+  res.send(`Your pet name is ${name} and age is ${age} years`);
+});
 app.listen(3000, () => {
   console.log("connected to server at port 3000");
 });
