@@ -1,94 +1,93 @@
 * {
-    box-sizing: border-box;
-    margin: 0%;
-    padding: 0%;
-   
+  box-sizing: border-box;
+  margin: 0%;
+  padding: 0%;
 }
-body{
-font-family: 'poppins';
-    overflow: hidden;
-    background-color: #00DBDE;
-    background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
-    
-   
+body {
+  font-family: "handlee";
+  overflow: hidden;
+  background-color: #00dbde;
+  background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
 }
-form{
-    position: relative;
-    top: 100px;
-    text-align: center;
+input::placeholder,#submit{
+  font-family: "Handlee";
 }
-h2{
-color: #fff;
-    font-size: 20px;
-    text-align: center;
-    position: relative;
-    top: 80px;
+form {
+  width: 400px;
+  position: relative;
+  top: 100px;
+  left: 35%;
+  text-align: center;
+  background-color: #cb9090;
+  padding: 25px;
+  border-radius: 10px;
+  transition: all 300ms ease-in-out;
 }
-#email,#pswd{
-    padding: 10px;
- 
-
+h2 {
+  color: #181818;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  top: -20px;
 }
-input:hover{
-    border: none;
-    background-color: #fafafa;
+#email,
+#pswd {
+  padding: 10px;
 }
-#email{
-    margin-left: 30px;
+input:hover {
+  border: none;
+  background-color: #fafafa;
 }
-#pswd{
-    margin-top: 10px;
+#email {
+  margin-left: 30px;
 }
-label{
-    font-size: 15px;
-   
+#pswd {
+  margin-top: 10px;
 }
-#submit{
-    position: relative;
-    left: 40px;
-    font-family: 'poppins';
-    margin-top: 50px; 
-    width: 180px;
-    height: 30px;
-    text-align: center;
+label {
+  font-size: 15px;
 }
-
-.para{
-    position: relative;
-    font-size: 13px;
-    left: 50px;
-    top: 10px;
-}
-#eye{
-    position:relative;
-   top: -85px;
-   left: 210px;
-    font-size: 14px;
-    cursor: pointer;
-    
-}
-#error{
- position: relative;
-    top: 110px;
-    left: 180px;
-    font-size: 14px;
-    font-family: 'poppins';
-}
-@media (min-width:768px) {
-    #error{
-        position: relative;
-        left: 570px;
-    }
-    
-}
-a{
-    position: relative;
-    top: 120px;
-    left: 650px;
-    font-size: 14px;
-    font-family: 'poppins';
-    color: #fff;
+#submit {
+  position: relative;
+  left: 40px;
+  margin-top: 50px;
+  width: 180px;
+  height: 30px;
+  text-align: center;
 }
 
-
-
+.para {
+  position: relative;
+  font-size: 13px;
+  left: 50px;
+  top: 10px;
+}
+#eye {
+  position: relative;
+  top: -85px;
+  left: 210px;
+  font-size: 14px;
+  cursor: pointer;
+}
+#error {
+  position: relative;
+  top: 110px;
+  left: 180px;
+  font-size: 14px;
+  font-family: "poppins";
+}
+@media (min-width: 768px) {
+  #error {
+    position: relative;
+    left: 570px;
+  }
+}
+a {
+  position: relative;
+  top: 120px;
+  left: 650px;
+  font-size: 14px;
+  font-family: "poppins";
+  color: #fff;
+}

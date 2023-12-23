@@ -53,11 +53,9 @@ let len = document.getElementById("length");
 
 inputText.onfocus = function () {
   document.getElementById("message").style.transition = "all 700ms 700ms ease";
-  document.querySelector(".user").remove();
 };
 inputText.onblur = function () {
   document.getElementById("message").style.display = "none";
- 
 };
 let lowercaseletters = /[a-z]/g;
 var uppercaseletters = /[A-Z]/g;
@@ -130,7 +128,6 @@ form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const formData = new FormData(form);
-
   const response = await fetch("http://localhost:3000/register", {
     method: "POST",
     body: formData,

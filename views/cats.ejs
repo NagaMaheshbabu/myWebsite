@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= companyData.name %></title>
+  </head>
+  <body>
+    <h2>Name of the company : <%= companyData.name %></h2>
+    <h3>Location : <%= companyData.location%></h3>
+    <h4>
+     <% for(let employee of companyData.employees){%>
+        <li><%= employee.name %> ,Position :<%=employee.position %></li>
+
+
+    <% }%>
+    </h4>
+    <form action="http://localhost:3000/demo" method="post">
+      <input type="text" name="name" placeholder="enter pet name">
+      <input type="text" name="age" placeholder="age of pet">
+      <button>submit</button>
+    </form>
+  </body>
+</html>

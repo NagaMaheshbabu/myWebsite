@@ -30,7 +30,8 @@ email.addEventListener('input',()=>{
 const disp = (text,color,res)=>{
     p.innerText = text
     p.style.color = color
-    document.querySelector('#submit').disabled =res
+    document.querySelector('#submit').disabled =res;
+
 }
 
 const form = document.querySelector('form');

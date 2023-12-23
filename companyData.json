@@ -1,0 +1,40 @@
+{
+  "name": "TechCorp",
+  "location": "Silicon Valley",
+  "CEO": {
+    "name": "Alice Johnson",
+    "age": 45,
+    "education": "Computer Science",
+    "hobbies": ["reading", "golf", "coding"]
+  },
+  "employees": [
+    {
+      "name": "Bob Smith",
+      "position": "Software Engineer",
+      "yearsOfService": 3
+    },
+    { "name": "Eva Davis", "position": "UX Designer", "yearsOfService": 5 },
+    {
+      "name": "Charlie Brown",
+      "position": "Data Scientist",
+      "yearsOfService": 2
+    }
+  ],
+  "departments": {
+    "engineering": {
+      "teamLead": "Bob Smith",
+      "projects": ["Project A", "Project B"]
+    },
+    "marketing": {
+      "teamLead": "Eva Davis",
+      "campaigns": ["Campaign X", "Campaign Y"]
+    }
+  },
+  "revenue": {
+    "2021": 5000000,
+    "2022": 7500000,
+    "2023": 10000000
+  },
+  "isOpenSource": true,
+  "founded": 2000
+}
